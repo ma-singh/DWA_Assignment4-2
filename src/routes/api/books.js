@@ -136,6 +136,7 @@ module.exports = (express) => {
 
   // search all authors by name
   router.get('/author/:name', (req, res) => {
+    // sanitize this shit
     const selectedAuthor = req.params.name
 
     Book.findMatches({
