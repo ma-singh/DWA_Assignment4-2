@@ -1,0 +1,7 @@
+{
+  "DATABASE_HOST": "127.0.0.1",
+  "DATABASE_NAME": "books",
+  "DATABASE_USERNAME": "root",
+  "DATABASE_PASSWORD": "dwa_assignment",
+  "DATABASE_PORT": 3306
+}

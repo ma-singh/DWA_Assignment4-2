@@ -1,13 +1,14 @@
 const Sequelize = require('sequelize')
+const config = require('../../config.json')
 require('dotenv').config()
 
 // create a new connection
 const sequelize = new Sequelize(
-  process.env.DATABASE_NAME,
-  process.env.DATABASE_USERNAME,
-  process.env.DATABASE_PASSWORD,
+  config.DATABASE_NAME,
+  config.DATABASE_USERNAME,
+  config.DATABASE_PASSWORD,
   {
-    port: process.env.DATABASE_PORT,
+    port: config.DATABASE_PORT,
     dialectOptions: {
       insecureAuth: true
     }
