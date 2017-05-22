@@ -35,3 +35,16 @@ exports.findMatches = (query, onSuccess, onError) => {
   .then(onSuccess)
   .error(onError)
 }
+
+exports.sanitizeInput = (input) => {
+  // special characters and what to replace them with
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  // return input with "dangerous" characters replaced
+  return input.replace(/[&<>"']/g, function(m) { return map[m]; });
+}

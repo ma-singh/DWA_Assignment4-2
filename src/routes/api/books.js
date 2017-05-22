@@ -34,8 +34,9 @@ module.exports = (express) => {
 
   // get a single book's information by its ID
   router.get('/books/:book_id', (req, res) => {
+    const selectedBook = Book.sanitizeInput(req.params.book_id);
 
-    Book.retrieveById(req.params.book_id, (books) => {
+    Book.retrieveById(selectedBook, (books) => {
       if(books) {
         res.json(books)
       }
@@ -49,6 +50,8 @@ module.exports = (express) => {
 
   // update a single book's information by its ID
   router.put('/books/:book_id', (req, res) => {
+    const selectedBook = Book.sanitizeInput(req.params.book_id);
+
     // use form data to update book data at the id passed in the URL
     Book.update({
       title: req.body.title,
@@ -56,7 +59,7 @@ module.exports = (express) => {
       language: req.body.language,
       published_year: req.body.year,
       ISBN: req.body.ISBN
-    }, { where: { book_id: req.params.book_id }}, () => {
+    }, { where: { book_id: selectedBook }}, () => {
       res.json({ message: "Book updated"})
     }, (error) => {
       res.send("Unable to update that book")
@@ -65,8 +68,9 @@ module.exports = (express) => {
 
   // delete a single book by it's ID
   router.delete('/books/:book_id', (req, res) => {
+    const selectedBook = Book.sanitizeInput(req.params.book_id);
 
-    Book.removeById(req.params.book_id, (books) => {
+    Book.removeById(selectedBook, (books) => {
       if(books) {
         res.json({ message: "Removed book from the collection"})
       }
@@ -80,8 +84,9 @@ module.exports = (express) => {
 
   // select a book, and then find all other books that match that author
   router.get('/books/:book_id/author', (req, res) => {
+    const selectedBook = Book.sanitizeInput(req.params.book_id);
 
-    Book.retrieveById(req.params.book_id, (books) => {
+    Book.retrieveById(selectedBook, (books) => {
       if(books) {
         // after getting the selected books information, match that books author with others in the database
         Book.findMatches({
@@ -108,8 +113,9 @@ module.exports = (express) => {
 
   // select a book, and then find all other copies of that book regardless of language
   router.get('/books/:book_id/language', (req, res) => {
+    const selectedBook = Book.sanitizeInput(req.params.book_id);
 
-    Book.retrieveById(req.params.book_id, (books) => {
+    Book.retrieveById(selectedBook, (books) => {
       if(books) {
         // after getting the selected books information, match that books ISBN with others in the database
         Book.findMatches({
@@ -137,7 +143,7 @@ module.exports = (express) => {
   // search all authors by name
   router.get('/author/:name', (req, res) => {
     // sanitize this shit
-    const selectedAuthor = req.params.name
+    const selectedAuthor = Book.sanitizeInput(req.params.name)
 
     Book.findMatches({
       where: { author: selectedAuthor }
