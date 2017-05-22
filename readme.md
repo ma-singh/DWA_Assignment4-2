@@ -50,6 +50,7 @@ git checkout development
 git merge FEATURE_NAME
 ```
 
+![Project Workflow](https://drive.google.com/open?id=0B_UVO044zMaxVG5vRGY1S2x4dHM)
 # Running the Application on the Server
 
 Log in to the remote server
