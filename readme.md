@@ -50,7 +50,7 @@ git checkout development
 git merge FEATURE_NAME
 ```
 
-![Project Workflow](http://imgur.com/f2drHGV)
+![Project Workflow](http://i.imgur.com/f2drHGV.jpg)
 # Running the Application on the Server
 
 Log in to the remote server
